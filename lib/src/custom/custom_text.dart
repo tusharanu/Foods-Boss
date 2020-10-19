@@ -54,4 +54,14 @@ class CustomText {
   String availability = 'Availability';
 
   String quick_selection = 'Quick Selection';
+
+  String manual__selection = 'Manual Selection';
+
+  String quantity = 'Quantity';
+
+  String grams = 'Grams';
+
+  String pricing = "Pricing";
+
+  String product_desc = 'Product Description';
 }

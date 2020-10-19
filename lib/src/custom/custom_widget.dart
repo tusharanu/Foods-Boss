@@ -19,6 +19,9 @@ class CustomWidget {
       // padding: EdgeInsets.only(left: 3, right: 10),
       decoration: BoxDecoration(
         color: Colors.white,
+        border: Border.all(
+          color: Colors.green,
+        ),
         borderRadius: BorderRadius.all(Radius.circular(6.0)),
       ),
       // border: Border.all(color: Colors.blue, width: 1)),
@@ -114,5 +117,16 @@ class CustomWidget {
     ListProductItem('Grapes', '25 KG in stocks'),
     ListProductItem('Mango', '25 KG in stocks'),
     ListProductItem('Papaya', ''),
+  ];
+
+  static List numberofitem = [
+    "5 Pcs",
+    "10 Pcs",
+    "15 Pcs",
+    "20 Pcs",
+    "25 Pcs",
+    "30 Pcs",
+    "35 Pcs",
+    "40 Pcs",
   ];
 }
