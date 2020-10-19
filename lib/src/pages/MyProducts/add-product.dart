@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../custom/custom_text.dart';
 import '../../custom/custom_widget.dart';
 
@@ -20,6 +23,95 @@ class _AddProductState extends State<AddProduct> {
     setState(() {
       _radioValue1 = value;
     });
+  }
+
+  File _image;
+  Future getImage(BuildContext context) async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+              content: SizedBox(
+            height: 150,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                FlatButton(
+                  child: Text(
+                    "Camera",
+                    style: TextStyle(fontSize: 26),
+                  ),
+                  onPressed: () async {
+                    var image = await ImagePicker.pickImage(
+                      source: ImageSource.camera,
+                    );
+                    // var image = await ImagePicker()
+                    //     .getImage(source: ImageSource.camera);
+                    setState(() {
+                      // _image = image;
+                      _image = image;
+                      print(_image);
+                      // List<int> bytes = Io.File(_image.path.split('/').last)
+                      //     .readAsBytesSync();
+                      // img64 = base64UrlEncode(bytes);
+                      // var base64String =
+                      //     base64UrlEncode(_image.readAsBytesSync());
+                      // base64String = base64Encode(_image.readAsBytesSync());
+                      // print('document $img64');
+                      // print('base64String $base64String');
+                      Navigator.pop(context);
+                    });
+                  },
+                ),
+                FlatButton(
+                  child: Text(
+                    "Gallery",
+                    style: TextStyle(fontSize: 26),
+                  ),
+                  onPressed: () async {
+                    var image = await ImagePicker.pickImage(
+                      source: ImageSource.gallery,
+                      imageQuality: 50,
+                    );
+                    // var image = await ImagePicker()
+                    //     .getImage(source: ImageSource.gallery);
+                    setState(() {
+                      _image = image;
+                      // print(_image.uri.toString());
+                      // List<int> bytes = Io.File(_image.path).readAsBytesSync();
+                      // img64 = base64UrlEncode(bytes);
+                      // print('img64 : $img64');
+                      // print('bytes $bytes');
+                      // print('base64Image : $img64');
+                      // base64String = base64Encode(_image.readAsBytesSync());
+                      // print('document $img64');
+                      // print('base64String $base64String');
+                      print('image1 : $_image');
+                      Navigator.pop(context);
+                    });
+                  },
+                ),
+                _image != null
+                    ? FlatButton(
+                        child: Text(
+                          "Remove Profile",
+                          style: TextStyle(fontSize: 26),
+                        ),
+                        onPressed: () async {
+                          setState(() {
+                            _image = null;
+                            Navigator.pop(context);
+                          });
+                        },
+                      )
+                    : Text(
+                        "",
+                      ),
+              ],
+            ),
+          ));
+        });
   }
 
   @override
@@ -90,7 +182,12 @@ class _AddProductState extends State<AddProduct> {
                             color: Colors.black,
                           ),
                         ),
-                        child: Icon(Icons.add_circle_outline),
+                        child: IconButton(
+                          icon: Icon(Icons.add_circle_outline),
+                          onPressed: () {
+                            getImage(context);
+                          },
+                        ),
                       ),
                       SizedBox(
                         height: 10,
@@ -102,7 +199,12 @@ class _AddProductState extends State<AddProduct> {
                             color: Colors.black,
                           ),
                         ),
-                        child: Icon(Icons.add_circle_outline),
+                        child: IconButton(
+                          icon: Icon(Icons.add_circle_outline),
+                          onPressed: () {
+                            getImage(context);
+                          },
+                        ),
                       ),
                     ],
                   ),
@@ -179,6 +281,9 @@ class _AddProductState extends State<AddProduct> {
                   );
                 }),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Container(
             child: Text(
               CustomText().manual__selection,
@@ -189,6 +294,9 @@ class _AddProductState extends State<AddProduct> {
               ),
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Container(
             child: Text(
               CustomText().quantity,
@@ -198,6 +306,9 @@ class _AddProductState extends State<AddProduct> {
                 fontWeight: FontWeight.w300,
               ),
             ),
+          ),
+          SizedBox(
+            height: 10,
           ),
           Container(
             child: CustomWidget.buildDropDown(
@@ -211,6 +322,9 @@ class _AddProductState extends State<AddProduct> {
                 list: weightList,
                 text: 'Select Weight'),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Container(
             child: Text(
               CustomText().grams,
@@ -220,6 +334,9 @@ class _AddProductState extends State<AddProduct> {
                 fontWeight: FontWeight.w300,
               ),
             ),
+          ),
+          SizedBox(
+            height: 10,
           ),
           Container(
             child: CustomWidget.buildDropDown(
@@ -233,6 +350,9 @@ class _AddProductState extends State<AddProduct> {
                 list: qtyList,
                 text: 'Select Quantity'),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Container(
             child: Text(
               CustomText().pricing,
@@ -242,6 +362,9 @@ class _AddProductState extends State<AddProduct> {
                 fontWeight: FontWeight.w300,
               ),
             ),
+          ),
+          SizedBox(
+            height: 10,
           ),
           Container(
             child: Row(
@@ -321,6 +444,9 @@ class _AddProductState extends State<AddProduct> {
               ],
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Container(
             child: Text(
               CustomText().product_desc,
@@ -330,6 +456,9 @@ class _AddProductState extends State<AddProduct> {
                 fontWeight: FontWeight.w500,
               ),
             ),
+          ),
+          SizedBox(
+            height: 10,
           ),
           SizedBox(
             width: 200,
