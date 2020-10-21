@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_owner/src/pages/accepted_order.dart';
 import 'src/pages/MyProducts/add-product.dart';
 import 'src/pages/MyProducts/dashboard.dart';
 import 'src/pages/MyProducts/my_products.dart';
@@ -60,6 +61,7 @@ class RouteGenerator {
       case '/OrderDetails':
         return MaterialPageRoute(
             builder: (_) => OrderWidget(routeArgument: args as RouteArgument));
+
       case '/OrderEdit':
         return MaterialPageRoute(
             builder: (_) =>

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_owner/src/pages/order.dart';
 import '../custom/custom_text.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -195,8 +196,9 @@ class _LoginWidgetState extends StateMVC<LoginWidget> {
                 margin: const EdgeInsets.only(right: 10),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context)
-                        .pushReplacementNamed('/ForgetPassword');
+                      Navigator.of(context)
+                       .pushNamed('/ForgetPassword');
+                   // Navigator.push(context, MaterialPageRoute(builder: (context)=>OrderWidget()));
                   },
                   child: Text(
                     CustomText().forget_password,

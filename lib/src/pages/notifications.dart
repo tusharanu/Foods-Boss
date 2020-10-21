@@ -29,48 +29,51 @@ class _NotificationsWidgetState extends StateMVC<NotificationsWidget> {
       key: _con.scaffoldKey,
       drawer: DrawerWidget(),
       appBar: AppBar(
-        leading: new IconButton(
-          icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
-          onPressed: () => _con.scaffoldKey?.currentState?.openDrawer(),
-        ),
-        automaticallyImplyLeading: false,
+        // leading: new IconButton(
+        //   icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
+        //   onPressed: () => _con.scaffoldKey?.currentState?.openDrawer(),
+        // ),
+       automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
         title: Text(
           S.of(context).notifications,
-          style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
+          style: Theme.of(context).textTheme.headline6.merge(TextStyle(color: Colors.black,fontSize: 20)),
         ),
-        actions: <Widget>[
-          FlatButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed('/Notifications');
-            },
-            child: Stack(
-              alignment: AlignmentDirectional.bottomEnd,
-              children: <Widget>[
-                Icon(
-                  Icons.notifications_none,
-                  color: Theme.of(context).hintColor,
-                  size: 28,
-                ),
-                Container(
-                  child: Text(
-                    _con.unReadNotificationsCount.toString(),
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.caption.merge(
-                          TextStyle(color: Theme.of(context).primaryColor, fontSize: 8),
-                        ),
-                  ),
-                  padding: EdgeInsets.all(0),
-                  decoration: BoxDecoration(color: Theme.of(context).accentColor, borderRadius: BorderRadius.all(Radius.circular(10))),
-                  constraints: BoxConstraints(minWidth: 13, maxWidth: 13, minHeight: 13, maxHeight: 13),
-                ),
-              ],
-            ),
-            color: Colors.transparent,
-          )
+        actions: [
+          IconButton(icon: Icon(Icons.settings,color: Colors.black,), onPressed: null)
         ],
+        // actions: <Widget>[
+        //   FlatButton(
+        //     onPressed: () {
+        //       Navigator.of(context).pushNamed('/Notifications');
+        //     },
+        //     child: Stack(
+        //       alignment: AlignmentDirectional.bottomEnd,
+        //       children: <Widget>[
+        //         Icon(
+        //           Icons.notifications_none,
+        //           color: Theme.of(context).hintColor,
+        //           size: 28,
+        //         ),
+        //         Container(
+        //           child: Text(
+        //             _con.unReadNotificationsCount.toString(),
+        //             textAlign: TextAlign.center,
+        //             style: Theme.of(context).textTheme.caption.merge(
+        //                   TextStyle(color: Theme.of(context).primaryColor, fontSize: 8),
+        //                 ),
+        //           ),
+        //           padding: EdgeInsets.all(0),
+        //           decoration: BoxDecoration(color: Theme.of(context).accentColor, borderRadius: BorderRadius.all(Radius.circular(10))),
+        //           constraints: BoxConstraints(minWidth: 13, maxWidth: 13, minHeight: 13, maxHeight: 13),
+        //         ),
+        //       ],
+        //     ),
+        //     color: Colors.transparent,
+        //   )
+        // ],
       ),
       body: RefreshIndicator(
         onRefresh: _con.refreshNotifications,
@@ -79,28 +82,28 @@ class _NotificationsWidgetState extends StateMVC<NotificationsWidget> {
             : ListView(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 10),
-                    child: ListTile(
-                      contentPadding: EdgeInsets.symmetric(vertical: 0),
-                      leading: Icon(
-                        Icons.notifications,
-                        color: Theme.of(context).hintColor,
-                      ),
-                      title: Text(
-                        S.of(context).notifications,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      subtitle: Text(
-                        S.of(context).swip_left_the_notification_to_delete_or_read__unread,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 20, right: 10),
+                  //   child: ListTile(
+                  //     contentPadding: EdgeInsets.symmetric(vertical: 0),
+                  //     leading: Icon(
+                  //       Icons.notifications,
+                  //       color: Theme.of(context).hintColor,
+                  //     ),
+                  //     title: Text(
+                  //       S.of(context).notifications,
+                  //       maxLines: 1,
+                  //       overflow: TextOverflow.ellipsis,
+                  //       style: Theme.of(context).textTheme.headline4,
+                  //     ),
+                  //     subtitle: Text(
+                  //       S.of(context).swip_left_the_notification_to_delete_or_read__unread,
+                  //       maxLines: 2,
+                  //       overflow: TextOverflow.ellipsis,
+                  //       style: Theme.of(context).textTheme.caption,
+                  //     ),
+                  //   ),
+                  // ),
                   ListView.separated(
                     padding: EdgeInsets.symmetric(vertical: 15),
                     scrollDirection: Axis.vertical,
