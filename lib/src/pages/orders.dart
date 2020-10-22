@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
-import '../../generated/l10n.dart';
 import '../controllers/order_controller.dart';
 import '../elements/EmptyOrdersWidget.dart';
 import '../elements/OrderItemWidget.dart';
@@ -19,12 +18,20 @@ class OrdersWidget extends StatefulWidget {
   _OrdersWidgetState createState() => _OrdersWidgetState();
 }
 
-class _OrdersWidgetState extends StateMVC<OrdersWidget> {
+class _OrdersWidgetState extends StateMVC<OrdersWidget>
+    with SingleTickerProviderStateMixin {
   OrderController _con;
 
   _OrdersWidgetState() : super(OrderController()) {
     _con = controller;
   }
+  TabController _tabController;
+  int _selectedTabIndex = 0;
+
+  List<Widget> list = [
+    Tab(text: ""),
+    Tab(icon: Icon(Icons.add_shopping_cart)),
+  ];
 
   @override
   void initState() {
@@ -32,6 +39,17 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
     _con.listenForStatistics();
     _con.listenForOrderStatus(insertAll: true);
     _con.selectedStatuses = ['0'];
+
+//Tab Bar Controller
+    _tabController = TabController(length: list.length, vsync: this);
+
+    _tabController.addListener(() {
+      setState(() {
+        _selectedTabIndex = _tabController.index;
+      });
+      print("Selected Index: " + _tabController.index.toString());
+    });
+
     super.initState();
   }
 
@@ -40,6 +58,14 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
     return Scaffold(
       key: _con.scaffoldKey,
       appBar: AppBar(
+        // bottom: TabBar(
+        //   onTap: (index) {
+        //     // Should not used it as it only called when tab options are clicked,
+        //     // not when user swapped
+        //   },
+        //   controller: _tabController,
+        //   tabs: list,
+        // ),
         iconTheme: IconThemeData(
           color: Colors.white, //change your color here
         ),
@@ -49,7 +75,9 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
           style: TextStyle(color: Colors.white),
         ),
         actions: <Widget>[
-          new ShoppingCartButtonWidget(iconColor: Colors.white, labelColor: Theme.of(context).accentColor),
+          new ShoppingCartButtonWidget(
+              iconColor: Colors.white,
+              labelColor: Theme.of(context).accentColor),
         ],
       ),
       body: RefreshIndicator(
